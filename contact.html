@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Houda Bourzouz</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/e0f661c42f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2><a href="index.html">Houda BRZ.</a></h2>
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/profile.php?id=100072379075908"
+              target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/houda.bourzouz/?next=%2F"
+              target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://github.com/HOUDABRZ" target="_blank"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <div class="contact">
+        <div class="small-container contact-con">
+          <h1>Contact Me</h1>
+          <form name="submit-to-google-sheet">
+            <input
+              class="name"
+              name="Name"
+              type="text"
+              placeholder="Your Name"
+            />
+            <input type="Email" name="Email" placeholder="Your Email" />
+            <textarea
+              name="Message"
+              cols="30"
+              rows="10"
+              placeholder="Your Message..."
+            ></textarea>
+            <button class="btn-form">Submit</button>
+          </form>
+        </div>
+        <span id="msg"></span>
+      </div>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbw3aZgwclz3WXGL9_COGYeZu0bFvSZPEHEdYwJoKGpL-3JdMMAiKwgr11QQeLaeBUwAmg/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const msg = document.getElementById("msg");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            msg.innerHTML = "Message sent successfully";
+            setTimeout(function () {
+              msg.innerHTML = "";
+            }, 5000);
+            form.reset();
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
